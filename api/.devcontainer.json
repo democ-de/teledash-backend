@@ -1,0 +1,33 @@
+{
+  "name": "API Devcontainer",
+  "dockerComposeFile": [
+    "../docker-compose.debug.yml"
+  ],
+  "service": "api",
+  "workspaceFolder": "/app",
+  "remoteUser": "appuser", // need to specify non-root user (see Dockerfile), so files/folders are created with correct owner/groups
+  "settings": {
+    "editor.tabCompletion": "on",
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false, // black does not support this
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+      "--config",
+      "/app/common/setup.cfg"
+    ],
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "python.sortImports.args": [
+      "--settings-path",
+      "/app/common/setup.cfg"
+    ],
+  },
+  "extensions": [
+    "ms-python.vscode-pylance"
+  ]
+}

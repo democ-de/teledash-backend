@@ -1,0 +1,6 @@
+TgCrypto==1.2.3
+Pyrogram==1.4.7
+minio==7.1.2
+flake8
+flake8-fixme
+black

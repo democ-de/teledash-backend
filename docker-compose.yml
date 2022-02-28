@@ -1,0 +1,104 @@
+version: "3.9"
+
+# TODO: adapt for production
+# see multiple worker example:
+# 1. https://github.com/bstiel/celery-docker/blob/master/docker-compose.yml
+# 2. https://www.distributedpython.com/2018/11/15/celery-docker/
+
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    container_name: api
+    volumes:
+      - ./common:/app/common
+    env_file:
+      - .env
+    command: tail -f /dev/null # keep shell attached
+    depends_on:
+      - mongo
+
+  worker-scraping:
+    build: &build
+      context: .
+      dockerfile: ./worker/Dockerfile
+    container_name: worker-scraping
+    volumes: &volumes
+      - ./common:/app/common
+    env_file:
+      - .env
+    command: celery --app=worker.main worker --loglevel=INFO --queues=scraping --hostname=scraping-worker@%h
+    depends_on:
+      - redis
+      - mongo
+
+  worker-files:
+    build: *build
+    container_name: worker-files
+    volumes: *volumes
+    env_file:
+      - .env
+    command: celery --app=worker.main worker --loglevel=INFO --queues=files --hostname=files-worker@%h --concurrency=2
+    depends_on:
+      - redis
+      - mongo
+
+  worker-process:
+    build: *build
+    container_name: worker-process
+    volumes: *volumes
+    env_file:
+      - .env
+    command: celery --app=worker.main worker --loglevel=INFO --queues=process --hostname=process-worker@%h --concurrency=2
+    depends_on:
+      - redis
+      - mongo
+
+  worker-beat:
+    build: *build
+    container_name: worker-beat
+    volumes: *volumes
+    env_file:
+      - .env
+    command: celery --app=worker.main beat
+    depends_on:
+      - redis
+      - mongo
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+
+  flower:
+    image: mher/flower
+    container_name: flower
+    environment:
+      CELERY_BROKER_URL: redis://redis
+      CELERY_RESULT_BACKEND: redis://redis
+    ports:
+      - 5555:5555
+    depends_on:
+      - redis
+
+  mongo:
+    image: mongo:5
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
+    volumes:
+      - ./mongo_data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+
+volumes:
+  worker-bashhistory:
+  api-bashhistory:

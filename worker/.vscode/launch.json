@@ -1,0 +1,69 @@
+{
+  // Verwendet IntelliSense zum Ermitteln möglicher Attribute.
+  // Zeigen Sie auf vorhandene Attribute, um die zugehörigen Beschreibungen anzuzeigen.
+  // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Celery (scraping-queue)",
+      "type": "python",
+      "request": "launch",
+      "module": "celery",
+      // "program": "${file}",
+      "console": "integratedTerminal",
+      "args": [
+        "--app=worker.main",
+        "worker",
+        "--loglevel=INFO",
+        "--queues=scraping",
+        "--hostname=scraping-worker@%h",
+      ]
+    },
+    {
+      "name": "Celery (files-queue)",
+      "type": "python",
+      "request": "launch",
+      "module": "celery",
+      // "program": "${file}",
+      "console": "integratedTerminal",
+      "args": [
+        "--app=worker.main",
+        "worker",
+        "--loglevel=INFO",
+        "--queues=files",
+        "--concurrency=2",
+        "--hostname=files-worker@%h",
+        "--pool=prefork",
+        // "-f files.log"
+      ]
+    },
+    {
+      "name": "Celery (process-queue)",
+      "type": "python",
+      "request": "launch",
+      "module": "celery",
+      // "program": "${file}",
+      "console": "integratedTerminal",
+      "args": [
+        "--app=worker.main",
+        "worker",
+        "--loglevel=INFO",
+        "--queues=process",
+        "--concurrency=2",
+        "--hostname=process-worker@%h",
+        "--pool=prefork",
+        // "-f process.log"
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Celery workers",
+      "configurations": [
+        "Celery (scraping-queue)",
+        "Celery (files-queue)",
+        "Celery (process-queue)"
+      ]
+    }
+  ]
+}
