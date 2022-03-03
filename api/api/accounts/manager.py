@@ -28,7 +28,7 @@ class AccountManager(BaseUserManager[AccountCreate, AccountDB]):
         self, account: AccountDB, token: str, request: Optional[Request] = None
     ):
         print(f"Verification requested for account {account.id}.")
-        print("Verification token: {token}")
+        print(f"Verification token: {token}")
 
     async def validate_password(
         self,
