@@ -1,9 +1,6 @@
 #!/bin/bash
 set -ex
 
-# to make this script executeable: chmod +x run-mongo-init.sh
-# The "mongo-init.js" must be present in the "/docker-entrypoint-initdb.d"-folder.
-
 CONTAINER_NAME=mongo
 ENV_PATH=.env
 

@@ -1,9 +1,7 @@
 #!/bin/bash
-set -ex
+set -e
 
-# To make this script executeable: chmod +x import.sh
-
-ENV_PATH='../../.env'
+ENV_PATH=.env
 CONTAINER_NAME=mongo
 
 # load .env variables, hide from output

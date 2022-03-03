@@ -19,7 +19,7 @@ __Warning__: Using this script will drop collections before importing new docume
 ```
 
 3. Adjust the variables at the beginning of `import.sh`
-4. `chmod +x import.sh` to make `import.sh` executeable
-5. Run `./import.sh`
+4. `chmod +x ./scripts/import/import.sh` to make `import.sh` executeable
+5. Run `./scripts/import/import.sh`
 
 The JSON-files are ignored by Git.
