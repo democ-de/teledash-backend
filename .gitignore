@@ -143,9 +143,6 @@ cython_debug/
 # MongoDB
 /mongo_data
 
-# Import script documents
-/scripts/import/*.json
-
 # Worker files
 /worker/tmp
 
