@@ -1,7 +1,7 @@
 # Teledash Backend
  *Research and analysis software for Telegram*
 
-## Repositores
+## Repositories
 
 * [Description](https://github.com/democ-de/teledash)
 * [Frontend](https://github.com/democ-de/teledash-frontend)
