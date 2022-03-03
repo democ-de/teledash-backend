@@ -1,4 +1,18 @@
 let res = [
+  db.accounts.insertOne({
+    id: { $binary: "0dtRWQ9gQWWyPTMGeH/wMw==", $type: "4" },
+    email: "user@example.com",
+    is_active: true,
+    is_superuser: true,
+    is_verified: true,
+    hashed_password:
+      "$2b$12$LuqZ828H/CJY90kTANEaxuDNLSw4WEeJoSPlvJzSsOoI9x7uHVzQa",
+    first_name: "Test",
+    last_name: "User",
+    clients: null,
+    created_at: { $date: "2022-03-03T13:42:59.831Z" },
+    updated_at: { $date: "2022-03-03T13:42:59.831Z" },
+  }),
   db.chats.createIndex(
     {
       title: "text",
@@ -58,16 +72,13 @@ let res = [
     phone_number: 1,
     updated_at: -1, // most recent
   }),
-  db.createCollection(
-    "metrics",
-    {
+  db.createCollection("metrics", {
     timeseries: {
-        timeField: "ts",
-        metaField: "metadata",
-        granularity: "seconds"
-    }
-    }
-  )
+      timeField: "ts",
+      metaField: "metadata",
+      granularity: "seconds",
+    },
+  }),
 ];
 
 printjson(res);
