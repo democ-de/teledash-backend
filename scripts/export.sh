@@ -1,7 +1,11 @@
 #!/bin/bash
 set -e
 
-# Usage: "./scripts/export/export.sh <collection name> <outfile path>"
+# Usage:
+# ./scripts/export/export.sh <collection name> <outfile path>
+
+# Takes a collection name and exports that collection to a specified
+# location ("outfile path") as a JSON-file.
 
 ENV_PATH=.env
 CONTAINER_NAME=mongo
