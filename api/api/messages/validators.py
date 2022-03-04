@@ -9,8 +9,8 @@ from common.database.models.message.attachment import MessageAttachmentType
 
 
 def parse_message_filter(
-    from_user_ids: Optional[List[int]] = Query(None, alias="from_user_ids[]"),
-    chat_ids: Optional[List[int]] = Query(None, alias="chat_ids[]"),
+    from_user_ids: Optional[List[int]] = Query(None),
+    chat_ids: Optional[List[int]] = Query(None),
     date_from: Optional[datetime] = None,
     date_to: Optional[datetime] = None,
     is_empty: Optional[bool] = None,
