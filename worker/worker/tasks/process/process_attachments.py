@@ -35,6 +35,8 @@ def upload_file_to_storage(
         storage.client.fput_object(
             bucket_name, object_name, file_path, content_type=mime_type
         )
+    except FileNotFoundError:
+        logger.error(f"File {file_path} not found", exc_info=True)
     except InvalidResponseError:
         logger.error("Error uploading file to storage", exc_info=True)
         return False
