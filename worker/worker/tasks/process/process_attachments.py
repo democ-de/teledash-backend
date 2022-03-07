@@ -99,8 +99,10 @@ def process_attachments(attachments: List[dict]) -> dict:
                     audio=file_path_str,
                     model=model_asr,
                 )
-
-            file_path.unlink()
+            try:
+                file_path.unlink()
+            except FileNotFoundError:
+                logger.error(f"File {file_path} not found", exc_info=True)
 
         else:
             # TODO: Handle duplicates and fetch previous ocr/asr result
@@ -127,7 +129,11 @@ def process_attachments(attachments: List[dict]) -> dict:
                     storage,
                 )
                 logger.info(f"Uploaded THUMBNAIL to storage '{thumb_object_name}'")
-                thumb_file_path.unlink()
+
+                try:
+                    thumb_file_path.unlink()
+                except FileNotFoundError:
+                    logger.error(f"File {thumb_file_path} not found", exc_info=True)
 
             # update storage references with thumbnails
             storage_refs.append({"bucket": "thumbnails", "object": thumb_object_name})
