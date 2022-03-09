@@ -110,13 +110,18 @@ def get_chat_language(
     )
     languages = [
         result.language
-        for result in detector.FindTopNMostFreqLangs(text_str, num_langs=2)
+        for result in detector.FindTopNMostFreqLangs(text_str, num_langs=3)
         if result.is_reliable
     ]
+    # save first language if supported by mongodb
     language = (
         languages[0] if languages and languages[0] in supported_lang_codes else None
     )
-    language_other = languages[1:] if len(languages) > 1 else None
+    # save secondary language and languages not supported by mongodb
+    if language:
+        language_other = languages[1:] if len(languages) > 1 else None
+    else:
+        language_other = languages if len(languages) >= 1 else None
 
     return language, language_other
 
