@@ -123,7 +123,7 @@ def recognize_text(
     languages: List[str],
     model_type: Literal["fast", "best", "custom"] = "fast",
 ) -> Union[str, None]:
-
+    text = None
     matched_languages = []
     for language in languages:
         # match incoming ISO 639-1 language code with ISO 639-2/T language code
@@ -172,22 +172,23 @@ def recognize_text(
                     exc_info=True,
                 )
 
-    # run text recognition
+    start_time = time.time()
+    model_langs = "+".join(matched_languages)
     try:
-        start_time = time.time()
-        model_langs = "+".join(matched_languages)
+        # run text recognition
         text = pytesseract.image_to_string(
             image, lang=model_langs, config=custom_config
         )
-        end_time = round(time.time() - start_time, 2)
-        logger.info(f"OCR using '{model_langs}/{model_type}' took {end_time} s")
-
-        text = clean_text(text)
-
-        return text
-
+    except FileNotFoundError:
+        logger.error(f"File {image} not found", exc_info=True)
     except Exception:
         logger.error(
             f"Text recognition for {image} failed",
             exc_info=True,
         )
+    end_time = round(time.time() - start_time, 2)
+    logger.info(f"OCR using '{model_langs}/{model_type}' took {end_time} s")
+
+    text = clean_text(text) if text else None
+
+    return text
