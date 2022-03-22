@@ -80,7 +80,7 @@ To test the scraping tasks, execute in a python shell:
 ### MinIO object storage
 We use MinIO for object storage in development.
 
-To setup a local MinIO instance, run:
+To setup a local MinIO instance with persistent storage, run:
 ```shell
 $ mkdir -p ~/minio/data
 
