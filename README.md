@@ -93,6 +93,8 @@ $ docker run \
     -e "MINIO_ROOT_PASSWORD=password" \
     quay.io/minio/minio server /data --console-address ":9001"
 ```
+Don't forget to update `MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD`. They must have the same values as `STORAGE_ACCESS_KEY` and `STORAGE_SECRET_KEY` in the `.env`-file.
+
 For more info check out the [MinIO Quickstart Guide](https://docs.min.io/docs/minio-docker-quickstart-guide.html).
 
 ### MinIO Client
