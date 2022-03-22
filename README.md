@@ -3,8 +3,9 @@
 
 ## Repositories
 
-* [Description](https://github.com/democ-de/teledash)
+* [Main repository](https://github.com/democ-de/teledash)
 * [Frontend](https://github.com/democ-de/teledash-frontend)
+* [Backend](https://github.com/democ-de/teledash-backend) (this repository)
 
 ## Configuration
 See `.env.example` for default configuration.
