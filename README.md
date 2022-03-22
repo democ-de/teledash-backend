@@ -58,7 +58,7 @@ Use the command-line [MinIO client](https://docs.min.io/docs/minio-client-comple
 
 ## Development
 
-We use [VS Code Remote-Containers](https://code.visualstudio.com/docs/remote/containers) for the development setup. To start developing in a Docker container, run the **Remote-Containers: Open Folder in Container**-Command from the Command Palette and select the *worker* or *api*-folder to open it in VS Code.
+We use [VS Code Remote-Containers](https://code.visualstudio.com/docs/remote/containers) for the development setup. To start developing in a Docker container, run the **Remote-Containers: Open Folder in Container**-Command from the Command Palette and select the *worker* or *api*-folder.
 
 ### API
 #### Starting the API
