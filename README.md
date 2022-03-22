@@ -3,7 +3,7 @@
 
 ## Repositories
 
-* [Main repository](https://github.com/democ-de/teledash)
+* [Project Description](https://github.com/democ-de/teledash)
 * [Frontend](https://github.com/democ-de/teledash-frontend)
 * [Backend](https://github.com/democ-de/teledash-backend) (this repository)
 
