@@ -8,7 +8,7 @@
 * [Backend](https://github.com/democ-de/teledash-backend) (this repository)
 
 ## Configuration
-See `.env.example` for default configuration.
+Rename `.env.example` to `.env` and edit it according to your needs. The defaults are listed below:
 
 | Name     |      Value      |
 |----------|-----------------|
