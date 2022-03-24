@@ -138,6 +138,10 @@ As root:
 $ docker exec -it --user root <container id or name> /bin/bash
 ```
 
+## Other Notes
+### Vosk on M1 Macs
+There's no official Vosk-package for Apple Silicon (arm64) CPUs, but a workaround. To make Vosk work on M1 open `/worker/requirements.txt` and replace `vosk` with `https://github.com/alphacep/vosk-api/releases/download/v0.3.32/vosk-0.3.32-py3-none-linux_aarch64.whl`
+
 ---
 
 
