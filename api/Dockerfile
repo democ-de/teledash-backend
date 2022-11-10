@@ -39,6 +39,3 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
 
 # Switch to non-root user
 USER appuser
-
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "80"]

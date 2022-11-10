@@ -14,11 +14,14 @@ services:
     container_name: api
     volumes:
       - ./common:/app/common
+      - api-bashhistory:/commandhistory # Persist bash history
     env_file:
       - .env
-    command: tail -f /dev/null # keep shell attached
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
     depends_on:
       - mongo
+    ports:
+      - 8000:8000
 
   worker-scraping:
     build: &build
@@ -27,6 +30,8 @@ services:
     container_name: worker-scraping
     volumes: &volumes
       - ./common:/app/common
+      - worker-bashhistory:/commandhistory # Persist bash history
+      - tmp-files:/app/tmp
     env_file:
       - .env
     command: celery --app=worker.main worker --loglevel=INFO --queues=scraping --hostname=scraping-worker@%h
@@ -102,3 +107,4 @@ services:
 volumes:
   worker-bashhistory:
   api-bashhistory:
+  tmp-files:

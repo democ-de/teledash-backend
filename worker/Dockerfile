@@ -53,5 +53,9 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
     && chown -R $USERNAME /commandhistory \
     && echo $SNIPPET >> "/home/$USERNAME/.bashrc"
 
+# Create tmp directory
+RUN mkdir /app/tmp \
+    && chown -R $USERNAME /app/tmp
+
 # Switch to non-root user
 USER appuser

@@ -40,6 +40,14 @@ Rename `.env.example` to `.env` and edit it according to your needs. The default
 
 ---
 
+## Deployment
+
+Clone this repository, change configuration accordingly (see above) and run `docker-compose up`.
+
+Make sure to change `JWT_SECRET`, `MONGO_USER` and `MONGO_PASSWORD` as the mongodb instance will be accessible remotely by default.
+
+---
+
 ## Export
 ### Database
 
@@ -69,7 +77,11 @@ We use [VS Code Remote-Containers](https://code.visualstudio.com/docs/remote/con
 ```shell
 $ uvicorn api.main:app --reload
 ```
+#### Endpoints
+Once the API is up and running you can open the interactive documentation of the API at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
+#### Default user
+The default username is admin@example.com (password: 12345678). Make sure to change this after deployment.
 
 ### Worker
 Start Celery by running the VSCode task "Celery workers".
@@ -139,15 +151,19 @@ $ docker exec -it --user root <container id or name> /bin/bash
 ```
 
 ## Other Notes
-### Vosk on M1 Macs
-There's no official Vosk-package for Apple Silicon (arm64) CPUs, but a workaround. To make Vosk work on M1 open `/worker/requirements.txt` and replace `vosk` with `https://github.com/alphacep/vosk-api/releases/download/v0.3.32/vosk-0.3.32-py3-none-linux_aarch64.whl`
+
+### Obtaining API credentials from Telegram
+For scraping you need to register at least one (Telegram) client and [obtain api_id and api_hash](https://core.telegram.org/api/obtaining_api_id#obtaining-api-id).
+
+### Vosk on Apple Silicon Macs
+There's no official Vosk-package for Apple Silicon (arm64) CPUs, but a workaround. To make Vosk work on M1/M2 open `/worker/requirements.txt` and replace `vosk` with `https://github.com/alphacep/vosk-api/releases/download/v0.3.32/vosk-0.3.32-py3-none-linux_aarch64.whl`
 
 ---
 
 
 ### ToDos
 - [ ] Add documentation for setup and deployment instructions
-- [ ] Add documentation for [frontend](https://github.com/democ-de/teledash-frontend)
+- [ ] Add documentation for [frontend](https://github.com/democ-de/teledash-frontend)
 - [ ] Improve full text search (implement fuzzy search)
 - [ ] Create JWT refresh endpoint for API
 - [ ] Implement Role Based Access Control (RBAC)

@@ -106,7 +106,7 @@ def process_attachments(attachments: List[dict]) -> dict:
 
         else:
             # TODO: Handle duplicates and fetch previous ocr/asr result
-            logger.info(f"Skipping '{object_name}' (already uploaded)")
+            logger.info(f"Skipping '{object_name}' (already uploaded or file does not exist)")
 
         # create storage reference
         storage_refs = [{"bucket": bucket_name, "object": object_name}]
