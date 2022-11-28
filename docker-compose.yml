@@ -75,8 +75,8 @@ services:
   redis:
     image: redis:latest
     container_name: redis
-    ports:
-      - 6379:6379
+    expose:
+      - 6379
 
   flower:
     image: mher/flower
@@ -84,6 +84,7 @@ services:
     environment:
       CELERY_BROKER_URL: redis://redis
       CELERY_RESULT_BACKEND: redis://redis
+      FLOWER_BASIC_AUTH: ${FLOWER_USER}:${FLOWER_PASSWORD}
     ports:
       - 5555:5555
     depends_on:

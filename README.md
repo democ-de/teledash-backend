@@ -19,6 +19,8 @@ Rename `.env.example` to `.env` and edit it according to your needs. The default
 | ``MONGO_DB_NAME`` | Name of MongoDB database. |
 | ``FLOWER_HOST`` | Hostname for [Flower](https://flower.readthedocs.io/) (for debugging). Default: _"flower"_ (forwards to the "flower" docker container) |
 | ``FLOWER_PORT`` | Port for Flower. Default: _"5555"_ |
+| ``FLOWER_USER`` | User to access Flower. |
+| ``FLOWER_PASSWORD`` | Password to access Flower. |
 | ``SCRAPE_CHATS_MAX_DAYS`` | Number of days content in chats will be scraped backwards (when scraping for the first time). Set to *0* to scrape all content. Warning: Scraping all content of a chat can take several days. Default: _"7"_ |
 | ``SCRAPE_CHATS_INTERVAL_MINUTES`` | Interval in minutes new messages of chats will be scraped. Default: _"30"_ |
 | ``SAVE_ATTACHMENT_TYPES`` | Attachments that will be downloaded and stored. Default: _["photo","audio","document","animation","video","voice","video_note","sticker"]_ |
@@ -40,11 +42,15 @@ Rename `.env.example` to `.env` and edit it according to your needs. The default
 
 ---
 
+## Requirements
+- Object Storage (S3 compatible) e.g. [MinIO Server](https://min.io/download#/docker) (see below),
+- [Docker](https://docs.docker.com/get-docker/)
+
 ## Deployment
 
 Clone this repository, change configuration accordingly (see above) and run `docker-compose up`.
 
-Make sure to change `JWT_SECRET`, `MONGO_USER` and `MONGO_PASSWORD` as the mongodb instance will be accessible remotely by default.
+Make sure to change `JWT_SECRET`, `FLOWER_USER`, `FLOWER_PASSWORD`, `MONGO_USER` and `MONGO_PASSWORD` as the mongodb instance will be accessible remotely by default.
 
 ---
 

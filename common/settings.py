@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     # Flower
     flower_host: str
     flower_port: int
+    flower_user: str
+    flower_password: str
 
     # Scraping settings
     scrape_chats_max_days: int
