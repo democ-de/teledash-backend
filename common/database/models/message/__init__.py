@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from pyrogram import types as pyrogram_types
 
 from common.database.models.message.attachment import MessageAttachment
+from common.database.models.message.entity import MessageEntity
 from common.database.models.message.forward import MessageForward
 from common.database.models.message.service_info import MessageServiceInfo
 from common.database.models.pyobjectid import PyObjectId
@@ -73,9 +74,9 @@ class Message(MessageIn):
     edit_date: Optional[datetime]
     author_signature: Optional[str]
     text: Optional[str]
-    entities: Optional[List[dict]]  # TODO: pyrogram_types.MessageEntity
+    entities: Optional[List[MessageEntity]]
     caption: Optional[str]
-    caption_entities: Optional[List[dict]]  # TODO: pyrogram_types.MessageEntity
+    caption_entities: Optional[List[MessageEntity]]
     views: Optional[int]
     is_outgoing: Optional[bool]
     service_info: Optional[MessageServiceInfo]
