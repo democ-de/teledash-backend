@@ -311,7 +311,10 @@ def scrape_chats(client_id: str, chat_ids: List[int]) -> None:
             )
 
             for message in iter_history(tg_client, tg_chat.id):
-                if last_message_id is not None and message.message_id < last_message_id:
+                if (
+                    last_message_id is not None
+                    and message.message_id <= last_message_id
+                ):
                     break
 
                 if message.date:
